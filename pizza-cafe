@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pizza Cafe Chenab Nagar - Hot & Fresh Everytime. Order pizza online.">
+<title>Pizza Cafe | House Of Taste</title>
+<style>
+:root{--yellow:#ffc400;--dark:#0b0b0b;--card:#171717;--muted:#bdbdbd;--white:#fff;--green:#20c76a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#0b0b0b;color:#fff}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+header{position:sticky;top:0;z-index:50;background:rgba(8,8,8,.96);backdrop-filter:blur(12px);border-bottom:1px solid #2a2a2a}
+.nav{max-width:1200px;margin:auto;min-height:72px;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:22px;color:var(--yellow)}
+.brand img{width:52px;height:52px;object-fit:contain;border-radius:50%}
+.navlinks{display:flex;gap:22px;align-items:center}
+.navlinks a{color:#eee;font-weight:700;font-size:14px}
+.navlinks a:hover{color:var(--yellow)}
+.cartbtn{border:1px solid var(--yellow);background:var(--yellow);color:#111;padding:10px 16px;border-radius:999px;font-weight:800}
+.hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:90px 20px;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.9)),url("https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1800&q=85") center/cover}
+.hero-inner{max-width:850px}
+.badge{display:inline-block;padding:8px 14px;border:1px solid #555;border-radius:999px;background:rgba(0,0,0,.5);color:#fff;margin-bottom:18px}
+.hero h1{font-size:clamp(46px,8vw,88px);line-height:.95;color:var(--yellow);text-transform:uppercase}
+.hero h2{font-size:clamp(22px,4vw,34px);margin:16px 0}
+.hero p{color:#ddd;font-size:18px;line-height:1.6}
+.actions{margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:14px 22px;border-radius:999px;font-weight:800;border:1px solid var(--yellow);background:var(--yellow);color:#111}
+.btn.alt{background:transparent;color:#fff}
+.btn.green{background:var(--green);border-color:var(--green);color:#fff}
+section{max-width:1200px;margin:auto;padding:75px 20px}
+.section-title{text-align:center;font-size:38px;color:var(--yellow);margin-bottom:10px}
+.section-sub{text-align:center;color:var(--muted);margin-bottom:40px}
+.sizes{text-align:center;color:#aaa;margin:-20px 0 35px}
+.category{margin:50px 0 20px;font-size:26px;color:#fff;border-left:4px solid var(--yellow);padding-left:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.card{background:var(--card);border:1px solid #292929;border-radius:18px;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:#555}
+.foodimg{height:190px;width:100%;object-fit:cover;display:block}
+.cardbody{padding:18px}
+.card h3{font-size:21px;margin-bottom:7px}
+.card p{color:#aaa;font-size:13px;min-height:34px}
+.price-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:16px 0}
+.size{background:#222;border:1px solid #333;border-radius:10px;padding:9px 5px;text-align:center}
+.size b{display:block;color:var(--yellow);font-size:15px}
+.size span{font-size:11px;color:#aaa}
+.add{width:100%;padding:12px;border:0;border-radius:10px;background:var(--yellow);font-weight:900;color:#111}
+.deals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.deal{background:linear-gradient(135deg,#171717,#262000);border:1px solid #5b4b00;border-radius:20px;padding:22px;text-align:left;position:relative;overflow:hidden}
+.deal h3{font-size:20px;color:var(--yellow);margin:0 0 8px}
+.deal strong{font-size:30px;display:block;margin:8px 0;color:#fff}
+.deal p{color:#bbb;margin:0 0 14px}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.info{background:#151515;border:1px solid #292929;border-radius:16px;padding:25px;text-align:center}
+.info h3{color:var(--yellow);margin-bottom:8px}.info p{color:#ccc;line-height:1.6}
+footer{border-top:1px solid #222;padding:35px 20px;text-align:center;color:#aaa}
+footer strong{color:var(--yellow)}
+.cart-panel{position:fixed;right:0;top:0;width:min(430px,100%);height:100vh;background:#111;z-index:100;transform:translateX(100%);transition:.3s;box-shadow:-10px 0 35px rgba(0,0,0,.5);display:flex;flex-direction:column}
+.cart-panel.open{transform:translateX(0)}
+.cart-head{padding:20px;border-bottom:1px solid #333;display:flex;justify-content:space-between;align-items:center}
+.cart-head h2{color:var(--yellow)}
+.close{background:none;border:0;color:#fff;font-size:28px}
+.cart-items{padding:15px;overflow:auto;flex:1}
+.cart-item{padding:14px 0;border-bottom:1px solid #2a2a2a;display:grid;grid-template-columns:1fr auto;gap:10px}
+.cart-item small{color:#aaa}
+.qty{display:flex;gap:7px;align-items:center;margin-top:8px}
+.qty button{width:28px;height:28px;border:1px solid #555;background:#222;color:#fff;border-radius:6px}
+.remove{background:none;border:0;color:#ff6666;font-size:12px}
+.cart-foot{padding:18px;border-top:1px solid #333}
+.total{display:flex;justify-content:space-between;font-size:20px;font-weight:900;margin-bottom:14px}
+.checkout{width:100%;padding:14px;border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:900}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;place-items:center;z-index:150;padding:20px}
+.modal.show{display:grid}
+.modalbox{background:#151515;border:1px solid #444;border-radius:18px;padding:25px;width:min(520px,100%)}
+.modalbox h2{color:var(--yellow);margin-bottom:15px}
+input,textarea{width:100%;padding:12px;margin:7px 0;background:#0d0d0d;border:1px solid #333;color:#fff;border-radius:9px}
+textarea{min-height:80px;resize:vertical}
+.note{font-size:12px;color:#999;line-height:1.5;margin:8px 0 15px}
+@media(max-width:760px){.navlinks{display:none}.hero{min-height:70vh}.section-title{font-size:31px}.foodimg{height:175px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="nav">
+  <a class="brand" href="#home">
+    <img src="logo.png" alt="Pizza Cafe Logo" onerror="this.style.display='none'">
+    <span>Pizza Cafe</span>
+  </a>
+  <nav class="navlinks">
+    <a href="#home">Home</a><a href="#menu">Menu</a><a href="#deals">Deals</a><a href="#contact">Contact</a>
+  </nav>
+  <button class="cartbtn" onclick="openCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="hero-inner">
+  <span class="badge">🍕 House Of Taste • Chenab Nagar</span>
+  <h1>Pizza Cafe</h1>
+  <h2>Hot & Fresh Everytime</h2>
+  <p>Fresh pizza, extra cheese, delicious fast food and everyday deals.</p>
+  <div class="actions">
+    <a class="btn" href="#menu">Order Now</a>
+    <a class="btn green" href="https://wa.me/923276276201" target="_blank">WhatsApp</a>
+  </div>
+</div>
+</section>
+
+<section id="menu">
+<h2 class="section-title">Our Pizza Menu</h2>
+<p class="section-sub">Choose your flavour, select a size and add it to your cart.</p>
+<p class="sizes">All pizza prices below are <b>Medium • Large • XL</b>.</p>
+
+<h3 class="category">Regular Flavour</h3>
+<div class="grid" id="regular"></div>
+
+<h3 class="category">Special Flavour</h3>
+<div class="grid" id="special"></div>
+</section>
+
+<section id="deals">
+<h2 class="section-title">Everyday Combo Deals</h2>
+<p class="section-sub">Choose your favourite deal and add it directly to your cart.</p>
+<div class="deals-grid" id="dealsGrid"></div>
+</section>
+
+<section id="contact">
+<h2 class="section-title">Contact Pizza Cafe</h2>
+<p class="section-sub">Order online or contact us directly.</p>
+<div class="info-grid">
+  <div class="info"><h3>📍 Location</h3><p>Chenab Nagar, Rabwah<br>Babul Abwab Near Railway Pathak</p></div>
+  <div class="info"><h3>📞 Call</h3><p><a href="tel:03277276201">0327-7276201</a><br><a href="tel:03336831891">0333-6831891</a></p></div>
+  <div class="info"><h3>🕐 Timing</h3><p>1:30 PM To 12:30 AM</p></div>
+  <div class="info"><h3>🚚 Delivery</h3><p>Free Home Delivery</p></div>
+</div>
+</section>
+</main>
+
+<footer>
+<p><strong>Pizza Cafe</strong> — Hot & Fresh Everytime</p>
+<p style="margin-top:8px">© 2026 Pizza Cafe. All Rights Reserved.</p>
+</footer>
+
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head"><h2>Your Cart</h2><button class="close" onclick="closeCart()">×</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="total"><span>Total</span><span>Rs. <span id="cartTotal">0</span></span></div>
+    <button class="checkout" onclick="checkout()">Buy / Place Order</button>
+  </div>
+</div>
+
+<div class="modal" id="checkoutModal">
+<div class="modalbox">
+  <h2>Place Your Order</h2>
+  <p class="note">Your order will be prepared as a WhatsApp message. Please enter your delivery details.</p>
+  <input id="customerName" placeholder="Your Name">
+  <input id="customerPhone" placeholder="Phone Number">
+  <textarea id="customerAddress" placeholder="Delivery Address"></textarea>
+  <button class="checkout" onclick="sendOrder()">Send Order on WhatsApp</button>
+  <button class="close" style="display:block;margin:12px auto 0;font-size:15px" onclick="closeCheckout()">Cancel</button>
+</div>
+</div>
+
+<script>
+const products=[
+{name:"Chicken Tikka",cat:"regular",m:1050,l:1299,xl:1699,img:"https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=900&q=80"},
+{name:"Chicken Fajita",cat:"regular",m:1099,l:1350,xl:1750,img:"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80"},
+{name:"Chicken All Special",cat:"regular",m:1150,l:1399,xl:1850,img:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=80"},
+{name:"Cheese Lover",cat:"regular",m:1150,l:1399,xl:1850,img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80"},
+{name:"Chicken Lover",cat:"regular",m:1150,l:1399,xl:1850,img:"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80"},
+{name:"Creamy Tikka",cat:"regular",m:1299,l:1599,xl:1799,img:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=80"},
+{name:"Malai Boti",cat:"special",m:1299,l:1599,xl:1799,img:"https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=900&q=80"},
+{name:"Seekh Kabab",cat:"special",m:1350,l:1650,xl:2199,img:"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80"},
+{name:"Double Stuffed",cat:"special",m:1299,l:1599,xl:1799,img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80"},
+{name:"Stuffed Crust",cat:"special",m:1299,l:1599,xl:1799,img:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=80"},
+{name:"BBQ Pizza",cat:"special",m:1250,l:1550,xl:1950,img:"https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=900&q=80"},
+{name:"Supreme Pizza",cat:"special",m:1250,l:1550,xl:1950,img:"https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=900&q=80"},
+{name:"Kabab Crust",cat:"special",m:1350,l:1650,xl:2199,img:"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80"},
+{name:"Chicago Dynamite",cat:"special",m:1300,l:1600,xl:2050,img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80"}
+];
+
+let cart=[];
+
+function renderProducts(){
+ for(const cat of ["regular","special"]){
+  document.getElementById(cat).innerHTML=products.filter(p=>p.cat===cat).map((p,i)=>{
+   const id=products.indexOf(p);
+   return `<article class="card">
+    <img class="foodimg" src="${p.img}" alt="${p.name}">
+    <div class="cardbody">
+      <h3>${p.name}</h3><p>Freshly prepared Pizza Cafe favourite.</p>
+      <div class="price-row">
+        <button class="size" onclick="add(${id},'Medium',${p.m})"><b>Rs. ${p.m}</b><span>Medium</span></button>
+        <button class="size" onclick="add(${id},'Large',${p.l})"><b>Rs. ${p.l}</b><span>Large</span></button>
+        <button class="size" onclick="add(${id},'XL',${p.xl})"><b>Rs. ${p.xl}</b><span>Extra Large</span></button>
+      </div>
+      <button class="add" onclick="add(${id},'Medium',${p.m})">+ Add to Cart</button>
+    </div>
+   </article>`;
+  }).join("");
+ }
+}
+function add(id,size,price){
+ cart.push({name:products[id].name,size,price});
+ updateCart();openCart();
+}
+const deals=[
+ {name:"2 Large Pizzas",price:2100},
+ {name:"2 Large Pizzas + 1.5L Drink",price:2300},
+ {name:"2 Medium Pizzas",price:1750},
+ {name:"2 Medium Pizzas + 1.5L Drink",price:1850},
+ {name:"2 XL Pizzas",price:3100},
+ {name:"2 XL Pizzas + 2.25L Drink",price:3300},
+ {name:"1 Medium + 1 Small Pizza",price:1300},
+ {name:"1 Large + 1 Medium Pizza",price:1950},
+ {name:"1 Large + 1 Small Pizza",price:1600},
+ {name:"1 XL + 1 Small Pizza",price:1900},
+ {name:"1 XL + 1 Medium Pizza",price:2350},
+ {name:"1 Large + 1 Small Pizza + 1L Drink",price:1850},
+ {name:"5 Zinger Shawarma",price:1100},
+ {name:"1 Medium Pizza + 2 Zinger Burger",price:1750},
+ {name:"1 Large Pizza + 2 Zinger Burger",price:2150}
+];
+function renderDeals(){
+ document.getElementById("dealsGrid").innerHTML=deals.map((d,i)=>`
+  <article class="deal">
+   <h3>🍕 Deal ${i+1}</h3>
+   <strong>${d.name}</strong>
+   <p>Rs. ${d.price}</p>
+   <div class="actions"><button class="btn" onclick="addDeal(${i})">Add Deal to Cart</button></div>
+  </article>`).join("");
+}
+function addDeal(i){
+ const d=deals[i];
+ cart.push({name:"Deal "+(i+1)+" — "+d.name,size:"Combo Deal",price:d.price});
+ updateCart();openCart();
+}
+function updateCart(){
+ document.getElementById("cartCount").textContent=cart.length;
+ document.getElementById("cartItems").innerHTML=cart.length?cart.map((x,i)=>`
+ <div class="cart-item"><div><b>${x.name}</b><br><small>${x.size} — Rs. ${x.price}</small></div>
+ <div><button class="remove" onclick="removeItem(${i})">Remove</button></div></div>`).join(""):"<p style='color:#aaa;text-align:center;padding:30px'>Your cart is empty.</p>";
+ document.getElementById("cartTotal").textContent=cart.reduce((a,x)=>a+x.price,0);
+}
+function removeItem(i){cart.splice(i,1);updateCart()}
+function openCart(){document.getElementById("cartPanel").classList.add("open")}
+function closeCart(){document.getElementById("cartPanel").classList.remove("open")}
+function checkout(){
+ if(!cart.length){alert("Your cart is empty.");return}
+ document.getElementById("checkoutModal").classList.add("show");
+}
+function closeCheckout(){document.getElementById("checkoutModal").classList.remove("show")}
+function sendOrder(){
+ const name=document.getElementById("customerName").value.trim();
+ const phone=document.getElementById("customerPhone").value.trim();
+ const address=document.getElementById("customerAddress").value.trim();
+ if(!name||!phone||!address){alert("Please enter your name, phone number and address.");return}
+ let msg="*Pizza Cafe - New Online Order*%0A%0A";
+ cart.forEach((x,i)=>msg+=(i+1)+". "+x.name+" ("+x.size+") - Rs. "+x.price+"%0A");
+ msg+="%0A*Total: Rs. "+cart.reduce((a,x)=>a+x.price,0)+"*%0A%0A";
+ msg+="Name: "+encodeURIComponent(name)+"%0APhone: "+encodeURIComponent(phone)+"%0AAddress: "+encodeURIComponent(address);
+ window.open("https://wa.me/923276276201?text="+msg,"_blank");
+}
+renderProducts();renderDeals();updateCart();
+</script>
+</body>
+</html>
